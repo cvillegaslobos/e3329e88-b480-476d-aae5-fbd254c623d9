@@ -1,41 +1,30 @@
-<!DOCTYPE html>
-<html>
-    <body>
-        <link rel="stylesheet" href="{{ secure_asset('css/bulma.css') }}">
-        
-        
-        <div class="container">
+@extends('layouts.master')
+
+@section('content')            
+    <table class="table is-bordered is-striped is-fullwidth ">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Lenguaje</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach ($response['values'] as $repo)
             
-            <table class="table is-fullwidth ">
-                <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Ramas</th>
-                    <th>Due&ntilde;o</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach ($data as $repo)
-                    
-                    <tr>
-                        <td>
-                            {{ $repo['name'] }}
-                        </td>
-                        <td>
-                            {{ $repo['branches'] }}
-                        </td>
-                        <td>
-                            {{ $repo['owner'] }}
-                        </td>
-                    </tr>
-                    
-                    @endforeach
-                </tbody>
-            </table>
+            <tr>
+                <td>
+                    <a href="/repo/{{ $repo['slug'] }}/edit">{{ $repo['name'] }}</a>
+                </td>
+                <td>
+                    {{ $repo['description'] }}
+                </td>
+                <td>
+                    {{ $repo['language'] }}
+                </td>
+            </tr>
             
-        </div>
-        
-        
-        <script type="text/javascript" src="{{ secure_asset('js/app.js') }}"></script>
-    </body>
-</html>
+            @endforeach
+        </tbody>
+    </table>
+@endsection

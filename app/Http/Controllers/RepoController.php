@@ -6,27 +6,44 @@ use Illuminate\Http\Request;
 
 class RepoController extends Controller
 {
-     public function index(Request $request){
-        
-        $user = $request->input('user');
-        $pass = $request->input('pass');
-        
-        $data = [
-            
-        ];
-        
+    private $client;
 
-        $client = new \GuzzleHttp\Client();
-        
-        $response = json_decode($client->get( "{$prefix}{$url}" , [
+    public function __construct(){
+        $this->client = new \GuzzleHttp\Client([
+            'base_uri' => config('app.bitbucket.url'),
             'auth' => [
-                $user, $pass
+                config('app.bitbucket.user'),
+                config('app.bitbucket.pass')
             ]
-        ])->getBody(), true);
+        ]);
+    }
+
+    public function overview(Request $request){
         
-        dd($response);
+        $response = $this->request("");
+        return view('repo.main', compact('response'));
         
-        return view('repo.main', compact('data'));
+    }
+
+    public function view($repo_slug){
+        $response = $this->request($repo_slug);
+
+        $branches = $this->request($response['links']['branches']['href']);
+
+        return view('repo.view', compact('response', 'branches'));
+    }
+
+    private function request($url, $method = 'get'){
+        
+        $return = [];
+
+        $response = $this->client->request($method, $url);
+
+        if( $response->getStatusCode() == 200 ){
+            $return = json_decode($response->getBody(), true);
+        }
+
+        return $return;
         
     }
 }

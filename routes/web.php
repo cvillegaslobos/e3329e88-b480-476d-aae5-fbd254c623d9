@@ -16,4 +16,5 @@ Route::get('/', function () {
 });
 
 
-Route::get('/main', 'RepoController@index');
+Route::get('/repo/overview', 'RepoController@overview');
+Route::get('/repo/{repo_slug}/edit', 'RepoController@view');

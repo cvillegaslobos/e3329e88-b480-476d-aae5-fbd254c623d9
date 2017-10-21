@@ -230,7 +230,8 @@ return [
 
     'bitbucket' => [
         'user' => env('BITBUCKET_USER', ''),
-        'pass' => env('BITBUCKET_PASS', '')
+        'pass' => env('BITBUCKET_PASS', ''),
+        'url' => env('BITBUCKET_URL', 'https://api.bitbucket.org/2.0/repositories/desarrolloweb/')
     ]
 
 
