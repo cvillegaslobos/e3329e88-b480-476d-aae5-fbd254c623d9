@@ -228,4 +228,10 @@ return [
 
     ],
 
+    'bitbucket' => [
+        'user' => env('BITBUCKET_USER', ''),
+        'pass' => env('BITBUCKET_PASS', '')
+    ]
+
+
 ];
