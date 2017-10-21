@@ -13,13 +13,18 @@ class RepoController extends Controller
         
         $data = [
             
-            [
-                'name' => 'medicap-ris-web',
-                'branches' => 65,
-                'owner' => 'cvillegas'
-            ]
-            
         ];
+        
+
+        $client = new \GuzzleHttp\Client();
+        
+        $response = json_decode($client->get( "{$prefix}{$url}" , [
+            'auth' => [
+                $user, $pass
+            ]
+        ])->getBody(), true);
+        
+        dd($response);
         
         return view('repo.main', compact('data'));
         
