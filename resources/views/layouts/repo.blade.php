@@ -1,14 +1,22 @@
 @extends('layouts.master')
 
-@section('breadcrumb')
+@section('top')
+<div class="level-right">
+    
 <nav class="breadcrumb" aria-label="breadcrumbs">
   <ul>
-    <li><a href='{{ url("/repo/overview") }}'>Repositorios</a></li>
+    <li>
+        <span class="icon">
+            <i class="fa fa-home"></i>
+        </span>
+        <a href='{{ url("/repo/overview") }}'>Repositorios</a>
+    </li>
     <li class="is-active"><a href="#" aria-current="page">{{ $response['name'] }}</a></li>
     <li class="is-active"><a href="#" aria-current="page">@yield('titulo')</a></li>
     
   </ul>
 </nav>
+</div>
 @endsection
 
 @section('content')
@@ -16,8 +24,22 @@
     <div class="column">
         <aside class="menu">
             <ul class="menu-list">
-                <li><a class="{{ request()->is('repo/*/summary') ? 'is-active' : '' }}" href='{{ url("/repo/{$response['slug']}/summary") }}'>Resumen</a></li>
-                <li><a class="{{ request()->is('repo/*/branches') ? 'is-active' : '' }}" href='{{ url("/repo/{$response['slug']}/branches") }}'>Ramas</a></li>
+                <li>
+                    <a class="{{ request()->is('repo/*/summary') ? 'is-active' : '' }}" href='{{ url("/repo/{$response['slug']}/summary") }}'>
+                        <span class="icon">
+                            <i class="fa fa-cog"></i>
+                        </span>
+                        Resumen
+                    </a>
+                </li>
+                <li>
+                    <a class="{{ request()->is('repo/*/branches') ? 'is-active' : '' }}" href='{{ url("/repo/{$response['slug']}/branches") }}'>
+                        <span class="icon">
+                            <i class="fa fa-code-fork"></i>
+                        </span>
+                        Ramas
+                    </a>
+                </li>
             </ul>
         </aside>
     </div>
@@ -28,5 +50,6 @@
         @yield('html')
     </div>
 </div>
+
 
 @endsection

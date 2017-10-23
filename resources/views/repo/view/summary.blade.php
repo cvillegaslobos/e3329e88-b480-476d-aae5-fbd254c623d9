@@ -4,7 +4,6 @@
 @section('subtitulo', 'Información del repositorio')
 
 @section('html')
-
 {!! Form::open(['url' => 'foo/bar']) !!}
 	<div class="field">
 		{!! Form::label('nombre', 'Nombre', ['class' => 'label']); !!}
