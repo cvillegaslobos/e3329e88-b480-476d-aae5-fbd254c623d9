@@ -25,12 +25,17 @@ class RepoController extends Controller
         
     }
 
-    public function view($repo_slug){
+    public function summary($repo_slug){
         $response = $this->request($repo_slug);
-
+        return view('repo.view.summary', compact('response', 'branches'));
+    }
+    
+    public function branches($repo_slug){
+        $response = $this->request($repo_slug);
         $branches = $this->request($response['links']['branches']['href']);
-
-        return view('repo.view', compact('response', 'branches'));
+        
+        return view('repo.view.branches', compact('response','branches'));
+        
     }
 
     private function request($url, $method = 'get'){
@@ -46,4 +51,6 @@ class RepoController extends Controller
         return $return;
         
     }
+    
+  
 }

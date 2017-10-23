@@ -1,6 +1,9 @@
-@extends('layouts.master')
+@extends('layouts.repo', $response)
 
-@section('content')
+@section('titulo', 'Resumen')
+@section('subtitulo', 'Información del repositorio')
+
+@section('html')
 
 {!! Form::open(['url' => 'foo/bar']) !!}
 	<div class="field">
@@ -12,20 +15,6 @@
     
 {!! Form::close() !!}
 
-<hr>
 {{-- json_encode($branches, true) --}}
-
-<div class="label">Ramas</div>
-<table class="table is-bordered is-striped is-narrow is-fullwidth">
-	@foreach ($branches['values'] as $branch)
-	<tr>
-		<td>
-			{{ $branch['name'] }}
-		</td>
-	</tr>
-	@endforeach
-</table>
-
-
 
 @endsection

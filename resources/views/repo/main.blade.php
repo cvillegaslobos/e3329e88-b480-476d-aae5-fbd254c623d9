@@ -14,7 +14,7 @@
             
             <tr>
                 <td>
-                    <a href="/repo/{{ $repo['slug'] }}/edit">{{ $repo['name'] }}</a>
+                    <a href="/repo/{{ $repo['slug'] }}/summary">{{ $repo['name'] }}</a>
                 </td>
                 <td>
                     {{ $repo['description'] }}
