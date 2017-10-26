@@ -23,6 +23,14 @@
                         Ramas
                     </a>
                 </li>
+                <li>
+                    <a class="{{ request()->is('repo/*/tags') ? 'is-active' : '' }}" href='{{ url("/repo/{$response['slug']}/tags") }}'>
+                        <span class="icon">
+                            <i class="fa fa-tag"></i>
+                        </span>
+                        Etiquetas
+                    </a>
+                </li>
             </ul>
         </aside>
     </div>

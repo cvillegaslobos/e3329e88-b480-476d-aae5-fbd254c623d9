@@ -20,22 +20,36 @@ class RepoController extends Controller
 
     public function overview(Request $request){
         
-        $response = $this->request("");
-        return view('repo.main', compact('response'));
+        $repos = $this->request("")['values'];
+        return view('repo.main', compact('repos'));
         
     }
 
     public function summary($repo_slug){
         $response = $this->request($repo_slug);
-        return view('repo.view.summary', compact('response', 'branches'));
+        return view('repo.show.summary', compact('response', 'branches'));
     }
     
-    public function branches($repo_slug){
+    public function branches($repo_slug, Request $request){
         $response = $this->request($repo_slug);
-        $branches = $this->request($response['links']['branches']['href']);
         
-        return view('repo.view.branches', compact('response','branches'));
+        $url = "{$response['links']['branches']['href']}";
         
+        if($request->has('page')){
+            $url.= "?page={$request->input('page')}";
+        }
+        
+        
+        $branches = $this->request($url);
+        
+        return view('repo.show.branches', compact('response','branches'));
+    }
+    
+    public function tags($repo_slug){
+        $response = $this->request($repo_slug);
+        $tags = $this->request($response['links']['tags']['href']);
+        
+        return view('repo.show.tags', compact('response','tags'));
     }
 
     private function request($url, $method = 'get'){
