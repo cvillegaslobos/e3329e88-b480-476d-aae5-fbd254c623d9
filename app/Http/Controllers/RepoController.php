@@ -20,8 +20,19 @@ class RepoController extends Controller
 
     public function overview(Request $request){
         
-        $repos = $this->request("")['values'];
-        return view('repo.main', compact('repos'));
+        $url = '';
+        if($request->filled('page')){
+            $url = "?page={$request->page}";
+        }
+        
+        $repos = $this->request($url);
+        
+        session()->put('next', $repos['next']);
+        $actual = $repos['page'];
+        $next = $repos['page']+1;
+        $prev = ($repos['page']-1 <= 0 ? 1: $repos['page']-1);
+        $repos = $repos['values'];
+        return view('repo.main', compact('repos', 'next', 'prev', 'actual'));
         
     }
 

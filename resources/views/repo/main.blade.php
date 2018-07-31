@@ -31,4 +31,13 @@
         @endforeach
     </tbody>
 </table>
+
+@if($actual == 1)
+<button class="disabled button">Anterior</button>
+@else
+<a href="?page={{ $prev }}" class="button">Anterior</a>
+@endif
+
+<a href="?page={{ $next }}" class="button">Siguiente</a>
+
 @endsection
