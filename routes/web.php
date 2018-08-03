@@ -19,6 +19,7 @@ Route::get('/', function () {
 Route::get('/repo/overview', 'RepoController@overview');
 Route::get('/repo/{repo_slug}/summary', 'RepoController@summary');
 Route::get('/repo/{repo_slug}/branches', 'RepoController@branches');
+Route::get('/repo/{repo_slug}/commits', 'RepoController@commits');
 Route::get('/repo/{repo_slug}/tags', 'RepoController@tags');
 
 Route::get('/cevichazo', 'CevichazoController@index');

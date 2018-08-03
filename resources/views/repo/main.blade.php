@@ -9,7 +9,7 @@
     <thead>
     <tr>
         <th>Nombre</th>
-        <th>Descripcion</th>
+        <th>Descripción</th>
         <th>Lenguaje</th>
     </tr>
     </thead>
@@ -24,7 +24,7 @@
                 {{ $repo['description'] }}
             </td>
             <td>
-                {{ $repo['language'] }}
+                {{ $repo['language'] or '-'}}
             </td>
         </tr>
         
@@ -33,11 +33,11 @@
 </table>
 
 @if($actual == 1)
-<button class="disabled button">Anterior</button>
+<button disabled class="button">Anterior</button>
 @else
-<a href="?page={{ $prev }}" class="button">Anterior</a>
+<a href="?page={{ $prev }}" class="button is-primary">Anterior</a>
 @endif
 
-<a href="?page={{ $next }}" class="button">Siguiente</a>
+<a href="?page={{ $next }}" class="button is-primary">Siguiente</a>
 
 @endsection

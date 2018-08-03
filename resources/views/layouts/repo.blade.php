@@ -16,6 +16,14 @@
                     </a>
                 </li>
                 <li>
+                    <a class="{{ request()->is('repo/*/commits') ? 'is-active' : '' }}" href='{{ url("/repo/{$response['slug']}/commits") }}'>
+                        <span class="icon">
+                            <i class="fa fa-circle"></i>
+                        </span>
+                        Commits
+                    </a>
+                </li>
+                <li>
                     <a class="{{ request()->is('repo/*/branches') ? 'is-active' : '' }}" href='{{ url("/repo/{$response['slug']}/branches") }}'>
                         <span class="icon">
                             <i class="fa fa-code-fork"></i>

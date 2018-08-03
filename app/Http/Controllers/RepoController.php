@@ -25,20 +25,36 @@ class RepoController extends Controller
             $url = "?page={$request->page}";
         }
         
-        $repos = $this->request($url);
+        $response = $this->request($url);
         
-        session()->put('next', $repos['next']);
-        $actual = $repos['page'];
-        $next = $repos['page']+1;
-        $prev = ($repos['page']-1 <= 0 ? 1: $repos['page']-1);
-        $repos = $repos['values'];
-        return view('repo.main', compact('repos', 'next', 'prev', 'actual'));
+        session()->put('next', $response['next']);
+        $actual = $response['page'];
+        $next = $response['page']+1;
+        $prev = ($response['page']-1 <= 0 ? 1: $response['page']-1);
+        $repos = $response['values'];
+        $cantidad = $response['size'];
+        return view('repo.main', compact('repos', 'next', 'prev', 'actual', 'cantidad'));
         
     }
 
     public function summary($repo_slug){
         $response = $this->request($repo_slug);
         return view('repo.show.summary', compact('response', 'branches'));
+    }
+    
+    public function commits($repo_slug, Request $request){
+        $response = $this->request($repo_slug);
+        
+        $url = "{$response['links']['commits']['href']}";
+        
+        if($request->has('page')){
+            $url.= "?page={$request->input('page')}";
+        }
+        
+        
+        $commits = $this->request($url);
+        
+        return view('repo.show.commits', compact('response','commits'));
     }
     
     public function branches($repo_slug, Request $request){
